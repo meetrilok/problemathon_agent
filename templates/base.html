@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Idea Bot</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; }
+      .container { max-width: 1000px; margin: 2rem auto; background: #fff; padding: 1.5rem; border-radius: 8px; }
+      input, textarea, button { width: 100%; padding: 0.7rem; margin-bottom: 0.8rem; }
+      .btn { background: #1f6feb; border: none; color: #fff; cursor: pointer; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background: #f0f2f5; }
+      .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
+      .card { background: #f0f7ff; padding: 1rem; border-radius: 8px; }
+      .nav { margin-bottom: 1rem; }
+      .nav a { margin-right: 1rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <a href="{{ url_for('submit_idea') }}">Idea Submission</a>
+        <a href="{{ url_for('manager_login') }}">Manager</a>
+      </div>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul>
+            {% for category, message in messages %}
+              <li><strong>{{ category }}</strong>: {{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
