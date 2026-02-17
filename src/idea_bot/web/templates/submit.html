@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Submit an Innovation Idea</h2>
+<form method="post">
+  <label>Name</label>
+  <input name="name" required />
+  <label>Email</label>
+  <input name="email" type="email" required />
+  <label>Idea title</label>
+  <input name="title" required />
+  <label>Idea description</label>
+  <textarea name="description" rows="7" required></textarea>
+  <button class="btn" type="submit">Analyze and Submit</button>
+</form>
+
+{% if result %}
+  <div class="result">
+    <h3>Bot response</h3>
+    <p>{{ result.response_message }}</p>
+    <ul>
+      <li>Detected category: {{ result.category }}</li>
+      <li>Semantic match score: {{ '%.2f'|format(result.match_score * 100) }}%</li>
+      <li>Submission timestamp (UTC): {{ result.created_at }}</li>
+    </ul>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Manager Dashboard</h2>
+<p><a href="{{ url_for('web.manager_logout') }}">Logout</a></p>
+
+<div class="cards">
+  <div class="card"><strong>Total ideas</strong><br />{{ total_ideas }}</div>
+  <div class="card"><strong>Ideas today</strong><br />{{ ideas_today }}</div>
+  <div class="card"><strong>Ideas this week</strong><br />{{ ideas_week }}</div>
+  <div class="card"><strong>Unique categories</strong><br />{{ categories|length }}</div>
+</div>
+
+<h3>Category Breakdown</h3>
+<ul>
+  {% for category, count in categories.items() %}
+    <li>{{ category }}: {{ count }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Submitted Ideas</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Submitted (UTC)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for idea in ideas %}
+    <tr>
+      <td>{{ idea.id }}</td>
+      <td>{{ idea.name }}</td>
+      <td>{{ idea.email }}</td>
+      <td>{{ idea.title }}</td>
+      <td>{{ idea.category }}</td>
+      <td>{{ idea.created_at }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
